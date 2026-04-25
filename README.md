@@ -58,11 +58,18 @@ This will:
 
 Schedule it via cron, Windows Task Scheduler, or GitHub Actions (see `.github/workflows/weekly.yml`).
 
+## Web UI
+
+```bash
+python -m f1_predictor serve
+# open http://localhost:8000
+```
+
 ## Docker
 
 ```bash
 docker build -t f1-predictor .
-docker run --rm -v "$(pwd)/data:/app/data" f1-predictor python -m f1_predictor.weekly
+docker run --rm -p 8000:8000 -v "$(pwd)/data:/app/data" f1-predictor
 ```
 
 ## CI/CD
