@@ -1,6 +1,0 @@
-{
-  "winner_cv_auc_mean": 0.9523901067604074,
-  "winner_cv_auc_std": 0.03485001351609519,
-  "podium_cv_auc_mean": 0.9608462491313936,
-  "podium_cv_auc_std": 0.004688807537167661
-}
