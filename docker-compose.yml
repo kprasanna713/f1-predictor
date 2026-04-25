@@ -1,0 +1,10 @@
+services:
+  predictor:
+    build: .
+    image: f1-predictor:latest
+    container_name: f1-predictor
+    volumes:
+      - ./data:/app/data
+    environment:
+      - F1_PREDICT_SEASON=2026
+    command: ["weekly"]

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\Pavan\\\\projects\\\\f1_predictor\" && .venv/Scripts/python.exe -m f1_predictor compare 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Pavan\\\\projects\\\\f1_predictor\" && .venv/Scripts/python -c \"\nimport pandas as pd, numpy as np\nfrom f1_predictor.features import _add_teammate_features\n\ndf = pd.DataFrame\\([\n  {'season':2024,'round':1,'driver_id':'verstappen','constructor_id':'red_bull','quali_pos':1,'position':1},\n  {'season':2024,'round':1,'driver_id':'perez','constructor_id':'red_bull','quali_pos':2,'position':2},\n  {'season':2024,'round':2,'driver_id':'verstappen','constructor_id':'red_bull','quali_pos':2,'position':2},\n  {'season':2024,'round':2,'driver_id':'perez','constructor_id':'red_bull','quali_pos':1,'position':1},\n]\\)\nresult = _add_teammate_features\\(df\\)\nprint\\(result[['season','round','driver_id','teammate_h2h_quali','teammate_h2h_race']]\\)\nprint\\(\\)\nprint\\('Round 1: both should be NaN \\(no prior history\\)'\\)\nprint\\('Round 2 verstappen: should be 1.0 \\(beat perez in R1 quali\\)'\\)\nprint\\('Round 2 perez:      should be 0.0 \\(lost to verstappen in R1 quali\\)'\\)\n\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Pavan\\\\projects\\\\f1_predictor\" && .venv/Scripts/python.exe -m pytest tests/ -v 2>&1)"
+    ]
+  }
+}

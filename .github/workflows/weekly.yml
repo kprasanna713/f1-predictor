@@ -1,0 +1,35 @@
+name: Weekly Prediction
+
+on:
+  schedule:
+    # Friday 12:00 UTC — usually after FP2 of a race weekend
+    - cron: '0 12 * * 5'
+  workflow_dispatch:
+
+jobs:
+  predict:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull predictor image
+        run: docker pull ghcr.io/${{ github.repository_owner }}/f1-predictor:latest
+
+      - name: Run weekly cycle
+        run: |
+          mkdir -p f1_predictor/data
+          docker run --rm \
+            -v "$PWD/f1_predictor/data:/app/data" \
+            ghcr.io/${{ github.repository_owner }}/f1-predictor:latest \
+            weekly
+
+      - name: Commit predictions
+        run: |
+          cd f1_predictor
+          git config user.name "f1-bot"
+          git config user.email "f1-bot@users.noreply.github.com"
+          git add data/predictions data/results || true
+          git diff --cached --quiet || git commit -m "weekly: $(date -u +%Y-%m-%d) predictions"
+          git push || true
