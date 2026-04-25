@@ -39,9 +39,15 @@ def practice_pace(season: int, rnd: int) -> pd.DataFrame:
     rows: list[dict] = []
     for sess_name in ("FP1", "FP2", "FP3"):
         sess = _safe_load(season, rnd, sess_name)
-        if sess is None or sess.laps is None or sess.laps.empty:
+        if sess is None:
             continue
-        laps = sess.laps.pick_quicklaps()
+        try:
+            if sess.laps is None or sess.laps.empty:
+                continue
+            laps = sess.laps.pick_quicklaps()
+        except Exception as exc:
+            logger.info("Laps unavailable for %s %s %s: %s", season, rnd, sess_name, exc)
+            continue
         if laps.empty:
             continue
         for drv_code, drv_laps in laps.groupby("Driver"):
@@ -76,11 +82,17 @@ def practice_pace(season: int, rnd: int) -> pd.DataFrame:
 
 
 def race_weather(season: int, rnd: int) -> Optional[dict]:
-    """Pull race-day weather summary from FastF1."""
+    """Pull race-day weather summary from FastF1. Returns None if race hasn't run yet."""
     sess = _safe_load(season, rnd, "R")
-    if sess is None or sess.weather_data is None or sess.weather_data.empty:
+    if sess is None:
         return None
-    w = sess.weather_data
+    try:
+        w = sess.weather_data
+        if w is None or w.empty:
+            return None
+    except Exception as exc:
+        logger.info("Weather data unavailable for %s round %s: %s", season, rnd, exc)
+        return None
     return {
         "season": season,
         "round": rnd,
