@@ -24,5 +24,7 @@ USER f1
 
 VOLUME ["/app/data"]
 
+EXPOSE 8000
+
 ENTRYPOINT ["python", "-m", "f1_predictor"]
 CMD ["weekly"]

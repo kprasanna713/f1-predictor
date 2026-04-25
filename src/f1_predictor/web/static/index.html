@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Race Predictor</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="checkered-strip top"></div>
+
+  <header class="hero">
+    <div class="hero-content">
+      <span class="badge">ML POWERED</span>
+      <h1>F1 RACE <span class="accent">PREDICTOR</span></h1>
+      <p class="tagline">XGBoost + 29 features. Trained on 8 seasons of telemetry.</p>
+    </div>
+    <div class="speedlines">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <button id="predict-btn" class="predict-btn">
+        <span class="btn-text">PREDICT NEXT RACE</span>
+        <span class="btn-glow"></span>
+      </button>
+      <div id="race-info" class="race-info"></div>
+    </section>
+
+    <section id="loader" class="loader hidden">
+      <div class="tyre"></div>
+      <p class="loader-text">Engines warming up...</p>
+    </section>
+
+    <section id="results" class="results hidden">
+      <div class="results-header">
+        <h2 id="race-title"></h2>
+        <span id="race-meta" class="race-meta"></span>
+      </div>
+      <div id="podium" class="podium"></div>
+      <div id="cards" class="cards"></div>
+    </section>
+
+    <section id="leaderboard-section" class="leaderboard-section">
+      <h3>Track record</h3>
+      <div id="leaderboard" class="leaderboard">
+        <p class="muted">Loading past predictions…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with XGBoost · FastF1 · Ergast · FastAPI · Docker</p>
+    <p class="footer-link">
+      <a href="https://github.com/kprasanna713/f1-predictor" target="_blank" rel="noopener">View on GitHub →</a>
+    </p>
+  </footer>
+
+  <div class="checkered-strip bottom"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

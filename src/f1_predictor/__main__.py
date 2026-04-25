@@ -21,6 +21,11 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("compare", help="Compare past predictions to actual results")
     sub.add_parser("weekly", help="Run the weekly cycle (compare → retrain → predict)")
 
+    p_serve = sub.add_parser("serve", help="Start the web UI (FastAPI)")
+    p_serve.add_argument("--host", default="0.0.0.0")
+    p_serve.add_argument("--port", type=int, default=8000)
+    p_serve.add_argument("--reload", action="store_true")
+
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -47,6 +52,9 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "weekly":
         from f1_predictor.weekly import run
         run()
+    elif args.cmd == "serve":
+        from f1_predictor.web.app import serve
+        serve(host=args.host, port=args.port, reload=args.reload)
     return 0
 
 

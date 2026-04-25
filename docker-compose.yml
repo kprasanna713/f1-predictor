@@ -1,8 +1,22 @@
 services:
-  predictor:
+  web:
     build: .
     image: f1-predictor:latest
-    container_name: f1-predictor
+    container_name: f1-predictor-web
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - F1_PREDICT_SEASON=2026
+    command: ["serve", "--host", "0.0.0.0", "--port", "8000"]
+    restart: unless-stopped
+
+  weekly:
+    build: .
+    image: f1-predictor:latest
+    container_name: f1-predictor-weekly
+    profiles: ["batch"]
     volumes:
       - ./data:/app/data
     environment:
