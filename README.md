@@ -1,3 +1,14 @@
+---
+title: F1 Race Predictor
+emoji: 🏎️
+colorFrom: red
+colorTo: gray
+sdk: docker
+app_port: 8000
+pinned: false
+license: mit
+---
+
 # F1 Race Winner Prediction
 
 End-to-end ML pipeline that predicts F1 race winners using FastF1 telemetry + Ergast historical data.
