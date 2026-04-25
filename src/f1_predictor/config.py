@@ -19,8 +19,8 @@ for d in (RAW_DIR, PROCESSED_DIR, MODELS_DIR, PREDICTIONS_DIR, RESULTS_DIR, CACH
 
 ERGAST_BASE_URL = os.getenv("ERGAST_BASE_URL", "https://api.jolpi.ca/ergast/f1")
 
-TRAIN_SEASONS = list(range(2018, 2025))
-PREDICT_SEASON = int(os.getenv("F1_PREDICT_SEASON", "2025"))
+TRAIN_SEASONS = list(range(2018, 2026))
+PREDICT_SEASON = int(os.getenv("F1_PREDICT_SEASON", "2026"))
 
 MODEL_PATH = MODELS_DIR / "f1_winner_model.pkl"
 

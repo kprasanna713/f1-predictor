@@ -21,7 +21,7 @@ against actual results once the race is over.
 ```bash
 pip install -r requirements.txt
 
-# 1. Train (uses 2018-2024 by default)
+# 1. Train (uses 2018-2025 by default; predicts 2026 season)
 python -m f1_predictor.train
 
 # 2. Predict the next race
