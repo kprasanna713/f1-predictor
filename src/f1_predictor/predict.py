@@ -5,7 +5,6 @@ import json
 import logging
 from datetime import datetime, date
 from pathlib import Path
-
 import joblib
 import pandas as pd
 
